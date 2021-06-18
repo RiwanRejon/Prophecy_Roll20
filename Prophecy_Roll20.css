@@ -1,0 +1,535 @@
+.charsheet {
+    top: 49px;
+    margin-left: -30px;
+    padding-left: 30px;
+    margin-right: 30px;
+    width:100%;
+    min-width: 9in;
+    background: url(http://imgsrv.roll20.net/?src=i.imgur.com/LJuGnRZ.jpg);
+}
+
+.sheet-tab_all{
+    padding-left: 5%;
+}
+
+.sheet-hidden {
+    display: none;
+}
+
+.btn.repcontrol_add, .btn.repcontrol_edit, .sheet-competence.btn.ui-draggable, input.sheet-tab + span::before{
+    border: none;
+    text-shadow: none;
+    background-image: -webkit-linear-gradient(top,#792b2b,#3c1919);
+    color:wheat;
+}
+
+.btn.repcontrol_add:hover,.btn.repcontrol_edit:hover,
+.sheet-competence.btn.ui-draggable:hover {
+    background-color: black;
+}
+
+input.sheet-tab:hover + span::before {
+    background-color: black;
+}
+
+.charsheet textarea, .charsheet input,
+.charsheet select {
+    border-color:#522a18;
+    background-color:#FFFBF4;
+    color:black;
+}
+
+.charsheet input {
+	display: inline-block;
+	text-align: center;
+	width: 165px;
+}
+
+img.sheet-spells  {
+    margin-left:30px;
+    margin-right:5px;
+    max-height: 30px;
+}
+
+.repcontrol{
+    margin-top: 10px;
+    width: 95%;
+}
+
+
+hr{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-top-color: #522a18;
+    margin-right: 2%;
+}
+
+input[type="checkbox"]{
+    width:auto;
+}
+
+.charsheet h3 {
+    text-align: center;
+    margin-right: 10px;
+    margin-left: 10px;
+    color: black;
+    border-bottom: 1px black solid;
+    margin-bottom: 10px;
+    border-radius: 7px;
+}
+
+.charsheet h4 {
+    text-align: center;
+    color: #522a18;
+    margin-top: 10px;
+}
+
+.charsheet label {
+    display: inline-block;
+    color:black;
+    width: 75px;
+    text-align: right;
+}
+
+.charsheet label.sheet-attributs {
+    padding-left: 8%;
+    color: #522a18;
+}
+
+.charsheet label.sheet-attributs,
+.charsheet label.sheet-base_infos {
+    margin-bottom: 15px;
+}
+
+
+.charsheet input.sheet-attributs {
+    background-color: #522a18;
+    border: none;
+    color: wheat;
+    width: 45px;
+    font-weight: bold;
+}
+
+.charsheet input.sheet-attributs.sheet-rappel {
+    margin-left: 10px;
+    background-color: #3c1919;
+    width: 25px;
+    height: 25px;
+    border-width: 1px 0px 1px 3px;
+    border-color: #00a2a2;
+    color: wheat;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.charsheet label.sheet-competence, input.sheet-blessure_max {
+    font-weight:normal;
+    font-size:11px;
+    color:black;
+}
+
+input.sheet-blessure_max {
+    width:19px;
+    background:transparent;
+    border:none;
+    margin-right: -35px;
+}
+
+.comp_line{
+    margin-bottom:5px;
+}
+
+input[type=number] {
+    width: 3.0em !important;
+}
+
+input.sheet-large_number {
+    width: 4.0em !important;
+}
+
+.comp_bonus{
+    background: wheat;
+    color: darkred;
+}
+
+.charsheet input.sheet-competence {
+    width:81px;
+    font-size:11px;
+    color:black;
+    border:none;
+    text-align: right;
+    background-color:transparent;
+}
+
+.charsheet button.sheet-competence {
+    font-size: 11px !important;
+}
+
+.charsheet input.sheet-tendances {
+	border-radius: 50%;
+	padding-left: 18px;
+    height: 60px;
+    width: 60px !important;
+}
+
+.charsheet input.sheet-blessure {
+	margin-left:5px;
+}
+
+.charsheet textarea {
+    margin-bottom: -10px;
+    height:18px;
+}
+
+select.sheet-competence{
+    width: 100px;
+    margin-top: 10px;
+    margin-left: 34px;
+}
+
+/*    ==============================    CHECKBOXES   ==================================    */
+
+/* Hide actual radio/checkbox */
+input[type="radio"],
+input[type="checkbox"]{
+    opacity: 0;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 5px;
+    left: 6px;
+    margin: -10px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* Fake radio/checkbox */
+input[type="radio"] + span::before,
+input[type="checkbox"] + span::before{
+    margin-right: 4px;
+    border: solid 1px black;
+    background-color: #fffbf4;
+    line-height: 14px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+
+}
+
+/* Fake checkbox */
+input[type="checkbox"] + span::before{
+    content: "";
+    width: 14px;
+    height: 14px;
+    font-size: 12px;
+
+    border-radius: 50%;
+}
+
+input[type="checkbox"]:checked + span::before{
+    content: "X";
+    color:black;
+}
+
+input[type="checkbox"].sheet-blessure_max:checked + span::before{
+    font-size: 40px;
+    content: "•";
+    color:black;
+    pointer-events:none;
+}
+
+input[type="radio"].sheet-modexp{
+    opacity:1;
+    margin-left: 10px;
+}
+
+/* ====================== TABS  ===================== */
+
+
+.sheet-tab_buttons{}
+
+div.sheet-tab-content { display: none; }
+
+input.sheet-tab1:checked ~ div.sheet-tab1,
+input.sheet-tab2:checked ~ div.sheet-tab2,
+input.sheet-tab3:checked ~ div.sheet-tab3,
+input.sheet-tab4:checked ~ div.sheet-tab4{
+    display: block;
+}
+
+/*Tous les boutons de tab*/
+input.sheet-tab{
+    width: 150px;
+    height: 20px;
+    position: relative;
+    top: 12px;
+    left: 100px;
+    margin: -1.5px;
+    cursor: pointer;
+    z-index: 1;
+    opacity: 0;
+}
+
+input.sheet-tab1{
+    left: 0px;
+}
+input.sheet-tab2{
+    left: 60px;
+}
+input.sheet-tab3{
+    left: 120px;
+}
+input.sheet-tab4{
+    left: 180px;
+}
+
+input.sheet-tab + span::before{
+    content: attr(title);
+    text-align: center;
+    display: inline-block;
+
+    width: 150px;
+    border-radius: 7px;
+    height: 20px;
+    padding-top: 5px;
+    font-size: 18px;
+    position: absolute;
+    top: 80px;
+    left: 40px;
+}
+
+input.sheet-tab:checked + span::before{
+    background: #3c1919;
+}
+
+input.sheet-tab:not(:first-child) + span::before{}
+
+input.sheet-tab2:checked + span::before{}
+
+input.sheet-tab2 + span::before{
+    left: 251px;
+}
+
+input.sheet-tab3 + span::before{
+    left: 461px;
+}
+
+input.sheet-tab4 + span::before{
+    left: 667px;
+}
+
+div.sheet-tab-content{
+    padding-top:60px;
+    width: 95%;
+}
+
+div.sheet-tab1{
+    /*Szyl*/
+    /*background-image: url(http://imgsrv.roll20.net/?src=imgur.com/wiCadEO.png);
+    background-repeat: no-repeat;
+    background-position-y: 195px;
+    background-position-x: 55px;
+    background-size: 360px;
+    background-position-x: 47%;*/
+}
+
+div.sheet-tab2{}
+
+div.sheet-tab3{
+    background-image: url(https://imgur.com/KBmvsn7.png);
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+}
+
+div.sheet-tab4{
+    /*Kalim*/
+    /*background-image: url(https://imgur.com/KkDiXZz.png);
+    background-repeat: no-repeat;
+    background-position-x: 125%;*/
+}
+
+/* TOOLTIPS */
+
+.sheet-tooltip {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dashed #3c1919; */
+}
+
+.sheet-tooltip .sheet-tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #3c1919;
+  color: wheat;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.sheet-tooltip .sheet-tooltiptext .sheet-reserved {
+  margin-top: 5px;
+  color: #00a2a2;
+}
+
+.sheet-tooltip .sheet-tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -35px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #3c1919 transparent transparent transparent;
+}
+
+.sheet-tooltip:hover .sheet-tooltiptext{
+  visibility: visible;
+  opacity: 1;
+}
+
+/*   ======================      TEMPLATE   =======================   */
+
+.sheet-rolltemplate-5eAttack .sheet-container {
+    background-color: #ffffff;
+    border: 1px solid;
+    padding: 2px;
+    width: 189px;
+}
+
+.sheet-rolltemplate-5eAttack .sheet-container h1 {
+    color: rgb(126, 45, 64);
+    font-size: 1.2em;
+    font-variant: small-caps;
+    line-height: 20px;
+}
+
+.sheet-rolltemplate-5eAttack div {
+    padding: 2px;
+};
+
+.sheet-rolltemplate-5eAttack span {
+    color: rgb(126, 45, 64);
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.2em;
+    font-variant: small-caps;
+    line-height: 1.6em;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.sheet-rolltemplate-5eAttack .sheet-subheader {
+    color: #888;
+    font-size: 1em;
+    font-style: italic;
+}
+
+.sheet-rolltemplate-5eAttack .sheet-smalltext {
+    font-size: 0.8em;
+}
+
+.sheet-rolltemplate-5eAttack .sheet-arrow-right {
+    border-bottom: 2px solid transparent;
+    border-left: 180px solid rgb(126, 45, 64);
+    border-top: 2px solid transparent;
+}
+
+.sheet-rolltemplate-5eAttack .sheet-tcat {
+    font-style: italic;
+}
+
+.sheet-rolltemplate-5eAttack .inlinerollresult  {
+    background-color: #ffffff;
+    border: none;
+}
+
+.sheet-rolltemplate-5eAttack .inlinerollresult.fullcrit {
+    color: #3FB315;
+    border: none;
+}
+
+.sheet-rolltemplate-5eAttack .inlinerollresult.fullfail {
+    color: #B31515;
+    border: none;
+}
+
+.sheet-rolltemplate-5eAttack .inlinerollresult.importandivoll {
+    color: #4A57ED;
+    border: none;
+}
+
+/*   ======================      TEMPLATE   =======================   */
+
+.sheet-rolltemplate-5eDefense .sheet-container {
+    background-color: #ffffff;
+    border: 1px solid;
+    padding: 2px;
+    width: 189px;
+}
+
+.sheet-rolltemplate-5eDefense .sheet-container h1 {
+    color: rgb(45, 126, 64);
+    font-size: 1.2em;
+    font-variant: small-caps;
+    line-height: 20px;
+}
+
+.sheet-rolltemplate-5eDefense div {
+    padding: 2px;
+};
+
+.sheet-rolltemplate-5eDefense span {
+    color: rgb(45, 126, 64);
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.2em;
+    font-variant: small-caps;
+    line-height: 1.6em;
+    padding-left: 5px;
+    text-align: left;
+}
+
+.sheet-rolltemplate-5eDefense .sheet-subheader {
+    color: #888;
+    font-size: 1em;
+    font-style: italic;
+}
+
+.sheet-rolltemplate-5eDefense .sheet-smalltext {
+    font-size: 0.8em;
+}
+
+.sheet-rolltemplate-5eDefense .sheet-arrow-left {
+    border-bottom: 2px solid transparent;
+    border-right: 180px solid rgb(45, 126, 64);
+    border-top: 2px solid transparent;
+}
+
+.sheet-rolltemplate-5eDefense .sheet-tcat {
+    font-style: italic;
+}
+
+.sheet-rolltemplate-5eDefense .inlinerollresult  {
+    background-color: #ffffff;
+    border: none;
+}
+
+.sheet-rolltemplate-5eDefense .inlinerollresult.fullcrit {
+    color: #3FB315;
+    border: none;
+}
+
+.sheet-rolltemplate-5eDefense .inlinerollresult.fullfail {
+    color: #B31515;
+    border: none;
+}
+
+.sheet-rolltemplate-5eDefense .inlinerollresult.importandivoll {
+    color: #4A57ED;
+    border: none;
+}
