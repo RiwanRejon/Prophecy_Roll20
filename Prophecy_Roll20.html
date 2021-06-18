@@ -1,0 +1,1220 @@
+<!-- version custom de Prophecy RPG - feuille de personnage pour roll20 v1.0 par TearMaker972 -->
+
+<!-- TODO pour une v2
+
+- la réserve de mana peut pas dépasser la sphère
+
+- Faire un _each sur les comp pour prélever l'xp direct (maitrise/chance max, caracs, attributs, compétences...)
+Mettre un verrou pour changer de mode (libre ou xp)
+
+- Rendre la page plus "responsive"
+
+- rajouter un bouton de suppression du cout en mana
+-->
+<input class="hidden" name="attr_physique" />
+<input class="hidden" name="attr_mental" />
+<input class="hidden" name="attr_manuel" />
+<input class="hidden" name="attr_social" />
+
+<div class="tab_all">
+        <input type="radio" name="attr_tab" class="sheet-tab sheet-tab1" value="1" checked="checked" /><span title="Base"></span>
+        <input type="radio" name="attr_tab" class="sheet-tab sheet-tab2" value="2" /><span title="Compétences"></span>
+        <input type="radio" name="attr_tab" class="sheet-tab sheet-tab3" value="3" /><span title="Magie"></span>
+        <input type="radio" name="attr_tab" class="sheet-tab sheet-tab4" value="4" /><span title="Pouvoirs"></span>
+
+
+<!-- ============================================= 1 : INFOS DE BASE ============================================= -->
+<div class="sheet-tab-content sheet-tab1">
+
+    <!-- 1a : NOM, EXP, RENOMMEE, CARACS, STATS-->
+    <div class="sheet-2colrow" >
+        <div class="sheet-col" style="width:30%; padding-left:5%;">
+
+            <input type="text" name="attr_character_name" placeholder="Nom" style="font-size:24px;" /><br><br>
+            <input type="text" name="attr_caste" placeholder="Caste" /><br><br>
+
+            <label style="text-align: left; padding-left: 5px; font-weight: normal;">Renom :</label><input type="number" name="attr_renom" value="0" min="0" max="10" /><br>
+            <label style="text-align: left; padding-left: 5px; font-weight: normal;">Exp :</label><input type="number" name="attr_exp" value="0" />
+            <br>
+            <!-- radio mode xp -->
+            <!--<input type="radio" name="attr_mode_xp" class="modexp" value="0" checked="checked" />
+            <input type="radio" name="attr_mode_xp" class="modexp" value="1" /><label class="competence">- Egrat.:</label>-->
+    	</div>
+
+    	<!--Stats (caracs + attributs)-->
+    	<div class="sheet-col" style="width:60%;">
+    	<label>FOR :</label><input type="number" name="attr_force" value="0" min="0" max="40" />
+		<label>RÉS :</label><input type="number" name="attr_résistance" value="0" min="0" max="40" />
+		<label class="attributs">PHY :</label><input class="attributs" name="attr_physiqueB" value="@{physique}" disabled />
+		<br>
+		<label>INT :</label><input type="number" name="attr_intelligence" value="0" min="0" max="40" />
+		<label>VOL :</label><input type="number" name="attr_volonté" value="0" min="0" max="40" />
+		<label class="attributs">MEN :</label><input class="attributs" name="attr_mentalB" value="@{mental}" disabled />
+		<br>
+		<button title="Jet de Réaction" class="competence" type='roll' value='/me a fait [[@{coordination} + @{perception} + 1d10 + ?{Bonus?|0}]] sur son jet de réaction' name=""></button>
+		<label style="margin-left: 5px;width: auto;">COO :</label><input type="number" name="attr_coordination" value="0" min="0" max="40" />
+		<label>PER :</label><input type="number" name="attr_perception" value="0" min="0" max="40" />
+		<label class="attributs">MAN :</label><input class="attributs" name="attr_manuelB" value="@{manuel}" disabled />
+		<br>
+		<label>PRÉ :</label><input type="number" name="attr_présence" value="0" min="0" max="40" />
+		<label>EMP :</label><input type="number" name="attr_empathie" value="0" min="0" max="40" />
+		<label class="attributs">SOC :</label><input class="attributs" name="attr_socialB" value="@{social}" disabled />
+		<br>
+    	</div>
+
+    </div>
+
+
+<hr>
+
+<!--    1b : TENDANCES, BLESSURES, MAITRISE, CHANCE    -->
+<div class="sheet-3colrow">
+
+    <!--       Bonus         -->
+    <div class="sheet-col" style="margin-top:35px;">
+        <label>Chance:</label><input type="number" name="attr_chance" value="0" min="0" max="20" />
+        / <input type="number" name="attr_chance_max" value="0" min="0" max="20" />  <br>
+
+		<label>Maitrise:</label><input type="number" name="attr_maitrise" value="0" min="0" max="20" />
+		/ <input type="number" name="attr_maitrise_max" value="0" min="0" max="20" />
+    </div>
+
+    <!--      Tendances         -->
+    <div class="sheet-col">
+            <!--Dragon-->
+        	<input class="tendances" name="attr_draconisme" type="number" step="0.1" style="background-color: darkred; color: white; margin-left: 100px; margin-bottom: 5%; border: 1px white solid; border-top: 3px white solid;" value="0.0" min="0" /><br>
+        	<!--Fatalisme -->
+        	<input class="tendances" name="attr_fatalisme"  type="number" step="0.1" style="background-color: black; color: white; margin-left: 60px; border: 1px #009200 solid; border-left: 3px #009200 solid;" value="0.0" min="0" />
+        	<!--Humanisme-->
+    		<input class="tendances" name="attr_humanisme"  type="number" step="0.1" style="background-color: lightsteelblue; color: white; margin-left: 20px; border: 1px #888888 solid; border-right: 3px #888888 solid;" value="0.0" min="0" />
+			<br>
+    </div>
+
+    <!--      Blessures            -->
+    <div class="sheet-col">
+        <div>
+            <div>
+            <input class="blessure_max" name="attr_nb_egrat" /><label class="competence">* Egrat.:</label>
+                <input class="blessure" type="checkbox" name="attr_blessure_egrat1"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_egrat2"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_egrat3"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_egrat4" checked /><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_egrat5" checked /><span></span>
+                <label class="competence" style="width:30px">(0-9)</label>
+                <br>
+            </div>
+
+            <div style="padding-left: 10px;">
+            <input class="blessure_max" name="attr_nb_légère" /><label class="competence">* Légère:</label>
+                <input class="blessure" type="checkbox" name="attr_blessure_leg1"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_leg2"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_leg3"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_leg4"><span></span>
+                <label class="competence" style="width:60px">-1 (10-19)</label>
+                <br>
+
+            </div>
+
+            <div style="padding-left: 20px;">
+            <input class="blessure_max" name="attr_nb_grave" /><label class="competence">* Grave:</label>
+                <input class="blessure" type="checkbox" name="attr_blessure_grave1"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_grave2"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_grave3"><span></span>
+                <label class="competence" style="width:60px">-3 (20-29)</label>
+                <br>
+            </div>
+
+            <div style="padding-left: 30px;">
+            <input class="blessure_max" name="attr_nb_fatale" /><label class="competence">* Fatale:</label>
+                <input class="blessure" type="checkbox" name="attr_blessure_fatale1"><span></span>
+                <input class="blessure" type="checkbox" name="attr_blessure_fatale2"><span></span>
+                <label class="competence" style="width:50px">-5 (30-39)</label>
+                <br>
+            </div>
+
+            <div style="padding-left: 40px;">
+            <input class="blessure_max" name="attr_nb_mort" /><label class="competence">* Mort:</label>
+                <input class="blessure" type="checkbox" name="attr_blessure_mort1"><span></span>
+                <label class="competence" style="width:30px">(40+)</label>
+
+                <br>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<!--  1c : Armure, encombrement, Combat   -->
+<div class="sheet-colrow">
+
+    <!--Colonne armure, etc...-->
+    <div class="sheet-col" style="width:100%; margin-left:15%; margin-top:40px;">
+        <label class="base_infos">Armure</label><input type="number" name="attr_armure" value="0" min="0" max="40" /> / <input type="number" name="attr_armure_max" value="0" min="0" max="40" />
+        <label class="base_infos">Encomb.</label><input type="number" name="attr_encombrement" value="0" min="0" max="40" />
+        <label class="base_infos">Initiative</label><input type="number" name="attr_initiative" value="0" min="0" max="40" />
+        <button title="lance l'initiative" class="competence" type='roll' value='/me lance l&#39;initiative [[@{initiative}d10 + 5 &{tracker}]]' name=""></button>
+    </div>
+
+<!--                     COMBAT                  -->
+<h3 style="margin-top:60px; margin-bottom: 30px;">Combat</h3>
+
+    <!--Epuisement-->
+    <div class="sheet-col" style="width:100%; margin-left:15%;">
+            <!-- <label class="base_infos">Epuis. Att.</label><input type="number" name="attr_epuis_attaque" style="border-color: red;" step="5" value="0" min="0" max="40" /> -->
+            <label class="base_infos">Classe Equive</label><input type="number" name="attr_classe_esquive" style="border-color: blue;" class="attributs" value="[[@{physique} + @{esquive} + @{esquive_bonus} + 5 - @{encombrement}]]" disabled />
+            <label class="base_infos">Global modif</label><input type="number" name="attr_global_modif" style="border-color: green;" class="large_number" value="0" min="-40" max="40" />
+
+            <!-- <label class="base_infos">Epuis. Def.</label><input type="number" name="attr_epuis_défense" style="border-color: blue;" step="5" value="0" min="0" max="40" /> -->
+    </div>
+    <!--Titres-->
+    <div style="display: inline;">x3</div> <div style="display: inline; margin-left: 305px;">Toucher</div> <div style="display: inline;margin-left: 177px;">Dégâts</div>
+    <!--Armes-->
+    <fieldset class="repeating_armes">
+        <!--Difficulté attaque-->
+        <!-- <input name="attr_diff_attaque" type="number" style="width:50px;" step="5" value="15" min="0" max="100" /> -->
+        <input type="checkbox" name="attr_adv_attaque" value="100"/><span></span>
+        <input type="text" name="attr_nom_arme" placeholder="Arme" />
+        <input type="text" name="attr_type_attaque" style="width:120px;" placeholder="Type attaque" />
+        <!--CALCUL du toucher-->
+        <select name="attr_attribut_arme" style="width:70px; margin-left:10px;">
+            <option value="0">Attribut</option>
+            <option value="@{physique}">Physique</option>
+            <option value="@{manuel}">Manuel</option>
+            <option value="@{mental}">Mental</option>
+            <option value="@{social}">Social?!</option>
+        </select>
+        +
+        <select name="attr_type_arme" style="width:70px;">
+            <option value="0">Type</option>
+            <option value="@{armes_légères}">Légère</option>
+            <option value="@{armes_intermédiaires}">Interm.</option>
+            <option value="@{armes_lourdes}">Lourde</option>
+            <option value="@{coordination}">De jet</option>
+            <option value="@{armes_à_projectiles}">A project.</option>
+            <option value="@{competence_combat_1}">Spé 1</option>
+            <option value="@{competence_combat_2}">Spé 2</option>
+            <option value="@{competence_combat_3}">Spé 3</option>
+        </select>
+        +
+        <input name="attr_bonus_toucher" type="number" style="width:50px;" value="0" min="0" max="100" />
+        <!--Macro toucher-->
+        <!-- <button title="lance le toucher" class="competence" type='roll' value='/me a fait [[@{attribut_arme} + @{type_arme} + @{bonus_toucher} + 1d10 + @{global_modif} + ?{Bonus?|0}]] pour toucher avec @{nom_arme}. (Difficulté: [[@{diff_attaque} + @{epuis_attaque}]])' name=""></button> -->
+        <!-- <button title="lance le toucher" class="competence" type='roll' value='&{template:5eAttack} {{name=@{nom_arme}}} {{subtags=Attaq}} {{attack=[[@{attribut_arme} + @{type_arme} + @{bonus_toucher} + 1d10 + @{global_modif}]]}} {{attackadv=[[@{attribut_arme} + @{type_arme} + @{bonus_toucher} + 1d10 + @{global_modif}]]}} {{damage=[[1d20]]}} {{dmgcrit=[[2d20]]}}' name=""></button> -->
+
+        <!--CALCUL des dégats-->
+        <input name="attr_multiple_arme" type="number" style="width:35px; margin-left:15px;" value="0" min="0" max="5" />
+        x
+        <select name="attr_carac_arme" style="width:70px;">
+            <option value="0">Carac</option>
+            <option value="@{force}">Force</option>
+            <option value="@{coordination}">Coordination</option>
+        </select>
+        +
+        <input name="attr_bonus_arme" type="number" style="width:50px;" value="0" min="0" max="100" />
+        <!-- + NR
+        <input name="attr_nr_arme" type="number" style="width:35px;" value="0" min="0" max="20" />
+        NR
+        -->
+        <!--Macro dégats-->
+        <!-- <button title="lance les dégâts" class="competence" type='roll' value='/me inflige [[@{carac_arme} * @{multiple_arme} + @{bonus_arme} + (1 + @{nr_arme})d10]] de dégâts avec @{nom_arme} !' name=""></button> -->
+         <button title="lance l'attaque" class="competence" type='roll' value='&{template:5eAttack} {{adv=[[@{adv_attaque} + 0]]}} {{name=@{type_attaque}}} {{nom_arme= @{nom_arme}}} {{nom_cible=@{target|character_name}}} {{classe_esquive= @{target|classe_esquive}}} {{attack1=[[@{attribut_arme} + @{type_arme} + @{bonus_toucher} + 1d10 + @{global_modif} + ?{Bonus?|0}]]}} {{attack2=[[@{attribut_arme} + @{type_arme} + @{bonus_toucher} + 1d10 + @{global_modif} + ?{Bonus?|0}]]}} {{attack3=[[@{attribut_arme} + @{type_arme} + @{bonus_toucher} + 1d10 + @{global_modif} + ?{Bonus?|0}]]}} {{damage0=[[@{carac_arme} * @{multiple_arme} + @{bonus_arme} + 1d10 - @{target|armure}]]}} {{damage1=[[@{carac_arme} * @{multiple_arme} + @{bonus_arme} + 2d10 - @{target|armure}]]}} {{damage2=[[@{carac_arme} * @{multiple_arme} + @{bonus_arme} + 3d10 - @{target|armure}]]}} {{damage3=[[@{carac_arme} * @{multiple_arme} + @{bonus_arme} + 4d10 - @{target|armure}]]}} {{damage4=[[@{carac_arme} * @{multiple_arme} + @{bonus_arme} + 5d10 - @{target|armure}]]}} {{verif1=[[1d10]]}} {{verif2=[[1d10]]}} {{verif3=[[1d10]]}} {{tablecrit1=[[1d10]]}} {{tablecrit2=[[1d10]]}} {{tablecrit3=[[1d10]]}}' name=""></button>
+        <div style="margin-bottom:10px;"></div>
+    </fieldset>
+
+
+    <!--        ======================   DEBUT   TEMPLATE  ATTAQUE  =======================                   -->
+    <rolltemplate class="sheet-rolltemplate-5eAttack">
+        <div class="container">
+            <div><h1>{{name}}</h1></div>
+            <div><span class="subheader"><span class="smalltext">vs </span>{{nom_cible}}<span class="smalltext"> avec </span>{{nom_arme}}</span></div>
+            <div>vs {{classe_esquive}} CE</div>
+            <div class="arrow-container"><div class="arrow-right"></div></div>
+
+            <div>
+            {{attack1}}
+
+            {{#rollLess() attack1 15}}
+             - Échec
+            {{/rollLess() attack1 15}}
+
+            {{#rollLess() attack1 classe_esquive}}
+             - Raté
+            {{/rollLess() attack1 classe_esquive}}
+
+            {{#^rollLess() attack1 classe_esquive}}
+            {{#rollBetween() attack1 15 19}}
+             - 0NR | {{damage0}} - {{#rollLess() damage0 1}}Indemne{{/rollLess() damage0 1}}
+            {{#rollBetween() damage0 1 9}}Egrat{{/rollBetween() damage0 1 9}}
+            {{#rollBetween() damage0 10 19}}Légère{{/rollBetween() damage0 10 19}}
+            {{#rollBetween() damage0 20 29}}Grave{{/rollBetween() damage0 20 29}}
+            {{#rollBetween() damage0 30 39}}Fatale{{/rollBetween() damage0 30 39}}
+            {{#rollGreater() damage0 39}}Mort{{/rollGreater() damage0 39}}
+            {{/rollBetween() attack1 15 19}}
+
+            {{#rollBetween() attack1 20 24}}
+             - 1NR | {{damage1}} - {{#rollLess() damage1 1}}Indemne{{/rollLess() damage1 1}}
+            {{#rollBetween() damage1 1 9}}Egrat{{/rollBetween() damage1 1 9}}
+            {{#rollBetween() damage1 10 19}}Légère{{/rollBetween() damage1 10 19}}
+            {{#rollBetween() damage1 20 29}}Grave{{/rollBetween() damage1 20 29}}
+            {{#rollBetween() damage1 30 39}}Fatale{{/rollBetween() damage1 30 39}}
+            {{#rollGreater() damage1 39}}Mort{{/rollGreater() damage1 39}}
+            {{/rollBetween() attack1 20 24}}
+
+            {{#rollBetween() attack1 25 29}}
+            - 2NR | {{damage2}} - {{#rollLess() damage2 1}}Indemne{{/rollLess() damage2 1}}
+           {{#rollBetween() damage2 1 9}}Egrat{{/rollBetween() damage2 1 9}}
+           {{#rollBetween() damage2 10 19}}Légère{{/rollBetween() damage2 10 19}}
+           {{#rollBetween() damage2 20 29}}Grave{{/rollBetween() damage2 20 29}}
+           {{#rollBetween() damage2 30 39}}Fatale{{/rollBetween() damage2 30 39}}
+           {{#rollGreater() damage2 39}}Mort{{/rollGreater() damage2 39}}
+            {{/rollBetween() attack1 25 29}}
+
+            {{#rollBetween() attack1 30 34}}
+            - 3NR | {{damage3}} - {{#rollLess() damage3 1}}Indemne{{/rollLess() damage3 1}}
+           {{#rollBetween() damage3 1 9}}Egrat{{/rollBetween() damage3 1 9}}
+           {{#rollBetween() damage3 10 19}}Légère{{/rollBetween() damage3 10 19}}
+           {{#rollBetween() damage3 20 29}}Grave{{/rollBetween() damage3 20 29}}
+           {{#rollBetween() damage3 30 39}}Fatale{{/rollBetween() damage3 30 39}}
+           {{#rollGreater() damage3 39}}Mort{{/rollGreater() damage3 39}}
+            {{/rollBetween() attack1 30 34}}
+
+            {{#rollGreater() attack1 34}}
+            - 4NR | {{damage4}} - {{#rollLess() damage4 1}}Indemne{{/rollLess() damage4 1}}
+           {{#rollBetween() damage4 1 9}}Egrat{{/rollBetween() damage4 1 9}}
+           {{#rollBetween() damage4 10 19}}Légère{{/rollBetween() damage4 10 19}}
+           {{#rollBetween() damage4 20 29}}Grave{{/rollBetween() damage4 20 29}}
+           {{#rollBetween() damage4 30 39}}Fatale{{/rollBetween() damage4 30 39}}
+           {{#rollGreater() damage4 39}}Mort{{/rollGreater() damage4 39}}
+            {{/rollGreater() attack1 34}}
+            {{/^rollLess() attack1 classe_esquive}}
+
+            </div>
+            {{#rollGreater() adv 0}}
+            <div>
+            {{attack2}}
+
+            {{#rollLess() attack2 15}}
+             - Échec
+            {{/rollLess() attack2 15}}
+
+            {{#rollLess() attack2 classe_esquive}}
+             - Raté
+            {{/rollLess() attack2 classe_esquive}}
+
+            {{#^rollLess() attack2 classe_esquive}}
+            {{#rollBetween() attack2 15 19}}
+             - 0NR | {{damage0}} - {{#rollLess() damage0 1}}Indemne{{/rollLess() damage0 1}}
+            {{#rollBetween() damage0 1 9}}Egrat{{/rollBetween() damage0 1 9}}
+            {{#rollBetween() damage0 10 19}}Légère{{/rollBetween() damage0 10 19}}
+            {{#rollBetween() damage0 20 29}}Grave{{/rollBetween() damage0 20 29}}
+            {{#rollBetween() damage0 30 39}}Fatale{{/rollBetween() damage0 30 39}}
+            {{#rollGreater() damage0 39}}Mort{{/rollGreater() damage0 39}}
+            {{/rollBetween() attack2 15 19}}
+
+            {{#rollBetween() attack2 20 24}}
+             - 1NR | {{damage1}} - {{#rollLess() damage1 1}}Indemne{{/rollLess() damage1 1}}
+            {{#rollBetween() damage1 1 9}}Egrat{{/rollBetween() damage1 1 9}}
+            {{#rollBetween() damage1 10 19}}Légère{{/rollBetween() damage1 10 19}}
+            {{#rollBetween() damage1 20 29}}Grave{{/rollBetween() damage1 20 29}}
+            {{#rollBetween() damage1 30 39}}Fatale{{/rollBetween() damage1 30 39}}
+            {{#rollGreater() damage1 39}}Mort{{/rollGreater() damage1 39}}
+            {{/rollBetween() attack2 20 24}}
+
+            {{#rollBetween() attack2 25 29}}
+            - 2NR | {{damage2}} - {{#rollLess() damage2 1}}Indemne{{/rollLess() damage2 1}}
+           {{#rollBetween() damage2 1 9}}Egrat{{/rollBetween() damage2 1 9}}
+           {{#rollBetween() damage2 10 19}}Légère{{/rollBetween() damage2 10 19}}
+           {{#rollBetween() damage2 20 29}}Grave{{/rollBetween() damage2 20 29}}
+           {{#rollBetween() damage2 30 39}}Fatale{{/rollBetween() damage2 30 39}}
+           {{#rollGreater() damage2 39}}Mort{{/rollGreater() damage2 39}}
+            {{/rollBetween() attack2 25 29}}
+
+            {{#rollBetween() attack2 30 34}}
+            - 3NR | {{damage3}} - {{#rollLess() damage3 1}}Indemne{{/rollLess() damage3 1}}
+           {{#rollBetween() damage3 1 9}}Egrat{{/rollBetween() damage3 1 9}}
+           {{#rollBetween() damage3 10 19}}Légère{{/rollBetween() damage3 10 19}}
+           {{#rollBetween() damage3 20 29}}Grave{{/rollBetween() damage3 20 29}}
+           {{#rollBetween() damage3 30 39}}Fatale{{/rollBetween() damage3 30 39}}
+           {{#rollGreater() damage3 39}}Mort{{/rollGreater() damage3 39}}
+            {{/rollBetween() attack2 30 34}}
+
+            {{#rollGreater() attack2 34}}
+            - 4NR | {{damage4}} - {{#rollLess() damage4 1}}Indemne{{/rollLess() damage4 1}}
+           {{#rollBetween() damage4 1 9}}Egrat{{/rollBetween() damage4 1 9}}
+           {{#rollBetween() damage4 10 19}}Légère{{/rollBetween() damage4 10 19}}
+           {{#rollBetween() damage4 20 29}}Grave{{/rollBetween() damage4 20 29}}
+           {{#rollBetween() damage4 30 39}}Fatale{{/rollBetween() damage4 30 39}}
+           {{#rollGreater() damage4 39}}Mort{{/rollGreater() damage4 39}}
+            {{/rollGreater() attack2 34}}
+            {{/^rollLess() attack2 classe_esquive}}
+
+            </div>
+            <div>
+            {{attack3}}
+
+            {{#rollLess() attack3 15}}
+             - Échec
+            {{/rollLess() attack3 15}}
+
+            {{#rollLess() attack3 classe_esquive}}
+             - Raté
+            {{/rollLess() attack3 classe_esquive}}
+
+            {{#^rollLess() attack3 classe_esquive}}
+            {{#rollBetween() attack3 15 19}}
+             - 0NR | {{damage0}} - {{#rollLess() damage0 1}}Indemne{{/rollLess() damage0 1}}
+            {{#rollBetween() damage0 1 9}}Egrat{{/rollBetween() damage0 1 9}}
+            {{#rollBetween() damage0 10 19}}Légère{{/rollBetween() damage0 10 19}}
+            {{#rollBetween() damage0 20 29}}Grave{{/rollBetween() damage0 20 29}}
+            {{#rollBetween() damage0 30 39}}Fatale{{/rollBetween() damage0 30 39}}
+            {{#rollGreater() damage0 39}}Mort{{/rollGreater() damage0 39}}
+            {{/rollBetween() attack3 15 19}}
+
+            {{#rollBetween() attack3 20 24}}
+             - 1NR | {{damage1}} - {{#rollLess() damage1 1}}Indemne{{/rollLess() damage1 1}}
+            {{#rollBetween() damage1 1 9}}Egrat{{/rollBetween() damage1 1 9}}
+            {{#rollBetween() damage1 10 19}}Légère{{/rollBetween() damage1 10 19}}
+            {{#rollBetween() damage1 20 29}}Grave{{/rollBetween() damage1 20 29}}
+            {{#rollBetween() damage1 30 39}}Fatale{{/rollBetween() damage1 30 39}}
+            {{#rollGreater() damage1 39}}Mort{{/rollGreater() damage1 39}}
+            {{/rollBetween() attack3 20 24}}
+
+            {{#rollBetween() attack3 25 29}}
+            - 2NR | {{damage2}} - {{#rollLess() damage2 1}}Indemne{{/rollLess() damage2 1}}
+           {{#rollBetween() damage2 1 9}}Egrat{{/rollBetween() damage2 1 9}}
+           {{#rollBetween() damage2 10 19}}Légère{{/rollBetween() damage2 10 19}}
+           {{#rollBetween() damage2 20 29}}Grave{{/rollBetween() damage2 20 29}}
+           {{#rollBetween() damage2 30 39}}Fatale{{/rollBetween() damage2 30 39}}
+           {{#rollGreater() damage2 39}}Mort{{/rollGreater() damage2 39}}
+            {{/rollBetween() attack3 25 29}}
+
+            {{#rollBetween() attack3 30 34}}
+            - 3NR | {{damage3}} - {{#rollLess() damage3 1}}Indemne{{/rollLess() damage3 1}}
+           {{#rollBetween() damage3 1 9}}Egrat{{/rollBetween() damage3 1 9}}
+           {{#rollBetween() damage3 10 19}}Légère{{/rollBetween() damage3 10 19}}
+           {{#rollBetween() damage3 20 29}}Grave{{/rollBetween() damage3 20 29}}
+           {{#rollBetween() damage3 30 39}}Fatale{{/rollBetween() damage3 30 39}}
+           {{#rollGreater() damage3 39}}Mort{{/rollGreater() damage3 39}}
+            {{/rollBetween() attack3 30 34}}
+
+            {{#rollGreater() attack3 34}}
+            - 4NR | {{damage4}} - {{#rollLess() damage4 1}}Indemne{{/rollLess() damage4 1}}
+           {{#rollBetween() damage4 1 9}}Egrat{{/rollBetween() damage4 1 9}}
+           {{#rollBetween() damage4 10 19}}Légère{{/rollBetween() damage4 10 19}}
+           {{#rollBetween() damage4 20 29}}Grave{{/rollBetween() damage4 20 29}}
+           {{#rollBetween() damage4 30 39}}Fatale{{/rollBetween() damage4 30 39}}
+           {{#rollGreater() damage4 39}}Mort{{/rollGreater() damage4 39}}
+            {{/rollGreater() attack3 34}}
+            {{/^rollLess() attack3 classe_esquive}}
+
+            </div>
+            {{/rollGreater() adv 0}}
+
+            <div class="arrow-container"><div class="arrow-right"></div></div>
+
+            {{#rollWasCrit() attack1}}
+    				    <div><span class="tcat">Vérif. crit 1: </span>{{verif1}} | {{tablecrit1}}</div>
+    			  {{/rollWasCrit() attack1}}
+            {{#rollWasFumble() attack1}}
+    				    <div><span class="tcat">Vérif. crit 1: </span>{{verif1}} | {{tablecrit1}}</div>
+    			  {{/rollWasFumble() attack1}}
+
+            {{#rollGreater() adv 0}}
+            {{#rollWasCrit() attack2}}
+    				    <div><span class="tcat">Vérif. crit 2: </span>{{verif2}} | {{tablecrit2}}</div>
+    			  {{/rollWasCrit() attack2}}
+            {{#rollWasFumble() attack2}}
+    				    <div><span class="tcat">Vérif. crit 2: </span>{{verif2}} | {{tablecrit2}}</div>
+    			  {{/rollWasFumble() attack2}}
+
+            {{#rollWasCrit() attack3}}
+    				    <div><span class="tcat">Vérif. crit 3: </span>{{verif3}} | {{tablecrit3}}</div>
+    			  {{/rollWasCrit() attack3}}
+            {{#rollWasFumble() attack3}}
+    				    <div><span class="tcat">Vérif. crit 3: </span>{{verif3}} | {{tablecrit3}}</div>
+    			  {{/rollWasFumble() attack3}}
+            {{/rollGreater() adv 0}}
+
+        </div>
+    </rolltemplate>
+    <!--        ======================   FIN   TEMPLATE  ATTAQUE  =======================                   -->
+
+
+
+
+    <div style="margin-bottom:30px;"></div>
+
+    <fieldset class="repeating_défenses">
+        <!--Difficulté Défense-->
+        <input type="checkbox" name="attr_adv_def" value="1"/><span></span>
+        <!-- <input name="attr_diff_def" type="number" style="width:50px;" step="5" value="15" min="0" max="100" /> -->
+
+        <input type="text" name="attr_nom_def" placeholder="Mouv. défensif" />
+        <!--partie calcul du jet de défense-->
+        <select name="attr_attribut_def" style="width:70px; margin-left:10px;">
+            <option value="@{physique}">Physique</option>
+            <option value="@{manuel}">Manuel</option>
+            <option value="@{mental}">Mental</option>
+            <option value="@{social}">Social?!</option>
+        </select>
+        +
+        <select name="attr_type_def" style="width:70px;">
+            <option value="@{esquive}">Esquive</option>
+            <option value="@{armes_légères}">Légère</option>
+            <option value="@{armes_intermédiaires}">Interm.</option>
+            <option value="@{armes_lourdes}">Lourde</option>
+            <option value="@{armes_de_jet}">De jet</option>
+            <option value="@{armes_à_projectiles}">A project.</option>
+            <option value="@{competence_combat_1}">Spé 1</option>
+            <option value="@{competence_combat_2}">Spé 2</option>
+            <option value="@{competence_combat_3}">Spé 3</option>
+        </select>
+        +
+        <input name="attr_bonus_def" type="number" style="width:50px;" value="0" min="0" max="100" />
+        <!--Macro def-->
+        <!-- <button title="lance la def" class="competence" type='roll' value='/me a fait [[@{attribut_def} + @{type_def} + @{bonus_def} + 1d10 + @{global_modif} + ?{Bonus?|0}]] sur @{nom_def}. (Difficulté: [[ @{diff_def} + @{epuis_défense} ]] )' name=""></button> -->
+
+
+
+        <button title="lance la def" class="competence" type='roll' value='&{template:5eDefense}{{name=@{nom_def}}} {{adv=[[@{adv_def} + 0]]}} {{def1=[[@{attribut_def} + @{type_def} + @{bonus_def} + 1d10 + @{global_modif} + ?{Bonus?|0}]]}} {{def2=[[@{attribut_def} + @{type_def} + @{bonus_def} + 1d10 + @{global_modif} + ?{Bonus?|0}]]}} {{def3=[[@{attribut_def} + @{type_def} + @{bonus_def} + 1d10 + @{global_modif} + ?{Bonus?|0}]]}} {{verif1=[[1d10]]}} {{verif2=[[1d10]]}} {{verif3=[[1d10]]}} {{tablecrit1=[[1d10]]}} {{tablecrit2=[[1d10]]}} {{tablecrit3=[[1d10]]}}' name=""></button>
+    </fieldset>
+
+    <!--        ======================   DEBUT   TEMPLATE  DEFENSE  =======================                   -->
+    <rolltemplate class="sheet-rolltemplate-5eDefense">
+        <div class="container">
+            <div><h1>{{name}}</h1></div>
+            <div><span class="subheader"></div>
+            <div class="arrow-container"><div class="arrow-left"></div></div>
+            <div>
+            {{def1}}
+
+            {{#rollLess() def1 15}}
+            - Échec
+            {{/rollLess() def1 15}}
+
+            {{#rollBetween() def1 15 19}}
+             - 0NR |
+            {{/rollBetween() def1 15 19}}
+
+            {{#rollBetween() def1 20 24}}
+             - 1NR |
+            {{/rollBetween() def1 20 24}}
+
+            {{#rollBetween() def1 25 29}}
+            - 2NR |
+            {{/rollBetween() def1 25 29}}
+
+            {{#rollBetween() def1 30 34}}
+            - 3NR |
+            {{/rollBetween() def1 30 34}}
+
+            {{#rollGreater() def1 34}}
+            - 4NR |
+            {{/rollGreater() def1 34}}
+            </div>
+            {{#rollGreater() adv 0}}
+            <div>
+            {{def2}}
+
+            {{#rollLess() def2 15}}
+            - Échec
+            {{/rollLess() def2 15}}
+
+            {{#rollBetween() def2 15 19}}
+             - 0NR |
+            {{/rollBetween() def2 15 19}}
+
+            {{#rollBetween() def2 20 24}}
+             - 1NR |
+            {{/rollBetween() def2 20 24}}
+
+            {{#rollBetween() def2 25 29}}
+            - 2NR |
+            {{/rollBetween() def2 25 29}}
+
+            {{#rollBetween() def2 30 34}}
+            - 3NR |
+            {{/rollBetween() def2 30 34}}
+
+            {{#rollGreater() def2 34}}
+            - 4NR |
+            {{/rollGreater() def2 34}}
+            </div>
+            <div>
+            {{def3}}
+
+            {{#rollLess() def3 15}}
+            - Échec
+            {{/rollLess() def3 15}}
+
+            {{#rollBetween() def3 15 19}}
+             - 0NR |
+            {{/rollBetween() def3 15 19}}
+
+            {{#rollBetween() def3 20 24}}
+             - 1NR |
+            {{/rollBetween() def3 20 24}}
+
+            {{#rollBetween() def3 25 29}}
+            - 2NR |
+            {{/rollBetween() def3 25 29}}
+
+            {{#rollBetween() def3 30 34}}
+            - 3NR |
+            {{/rollBetween() def3 30 34}}
+
+            {{#rollGreater() def3 34}}
+            - 4NR |
+            {{/rollGreater() def3 34}}
+            </div>
+            {{/rollGreater() adv 0}}
+            <div class="arrow-container"><div class="arrow-left"></div></div>
+
+        {{#rollWasCrit() def1}}
+            <div><span class="tcat">Vérif. crit 1: </span>{{verif1}}</div>
+        {{/rollWasCrit() def1}}
+        {{#rollWasFumble() def1}}
+            <div><span class="tcat">Vérif. crit 1: </span>{{verif1}}</div>
+        {{/rollWasFumble() def1}}
+
+        {{#rollGreater() adv 0}}
+        {{#rollWasCrit() def2}}
+            <div><span class="tcat">Vérif. crit 2: </span>{{verif2}}</div>
+        {{/rollWasCrit() def2}}
+        {{#rollWasFumble() def2}}
+            <div><span class="tcat">Vérif. crit 2: </span>{{verif2}}</div>
+        {{/rollWasFumble() def2}}
+
+        {{#rollWasCrit() def3}}
+            <div><span class="tcat">Vérif. crit 3: </span>{{verif3}}</div>
+        {{/rollWasCrit() def3}}
+        {{#rollWasFumble() def3}}
+            <div><span class="tcat">Vérif. crit 3: </span>{{verif3}}</div>
+        {{/rollWasFumble() def3}}
+        {{/rollGreater() adv 0}}
+
+        </div>
+    </rolltemplate>
+    <!--        ======================   FIN   TEMPLATE  DEF  =======================                   -->
+
+
+
+    <!--   Objets   -->
+    <h3 style="margin-top:60px;">Objets</h3>
+    <!--Richesse-->
+    <div class="sheet-col" style="width:100%; margin-left:5%; margin-top: 30px;">
+        <label class="base_infos">Dragon</label><input type="number" name="attr_money_dragon" value="0" min="0" style="background-color: darkred; color: wheat;" />
+        <label class="base_infos">Or</label><input class="large_number" type="number" name="attr_money_or" value="0" min="0" style="background-color: lightyellow;" />
+        <label class="base_infos">Argent</label><input class="large_number" type="number" name="attr_money_argent" value="0" min="0" style="background-color: lightgrey;" />
+        <label class="base_infos">Bronze</label><input class="large_number" type="number" name="attr_money_bronze" value="0" min="0" style="background-color: #ffdcce;" />
+        <label class="base_infos">Fer</label><input class="large_number" type="number" name="attr_money_fer" value="0" min="0" />
+    </div>
+
+    <!--Equipement-->
+    <br>
+    <input type="text" name="attr_equip_collier" placeholder="Collier" style="width:30%;" />
+    <input type="text" name="attr_equip_casque" placeholder="Casque" style="width:30%;" />
+    <input type="text" name="attr_equip_cape" placeholder="Cape" style="width:30%;" />
+    <br>
+    <input type="text" name="attr_equip_mg" placeholder="Main gauche" style="width:30%;" />
+    <input type="text" name="attr_equip_torse" placeholder="Armure" style="width:30%;" />
+    <input type="text" name="attr_equip_md" placeholder="Main droite" style="width:30%;" />
+    <br>
+    <input type="text" name="attr_equip_gants" placeholder="Gants" style="width:30%;" />
+    <input type="text" name="attr_equip_ceinture" placeholder="Ceinture" style="width:30%;" />
+    <input type="text" name="attr_equip_brass" placeholder="Avant-bras" style="width:30%;" />
+    <br>
+    <input type="text" name="attr_equip_bijou1" placeholder="Bijou 1" style="width:30%;" />
+    <input type="text" name="attr_equip_bottes" placeholder="Bottes" style="width:30%;" />
+    <input type="text" name="attr_equip_bijou2" placeholder="Bijou 2" style="width:30%;" />
+    <br>
+    <input type="text" name="attr_equip_objet1" placeholder="Objet rapide 1" style="width:30%;" />
+    <input type="text" name="attr_equip_objet2" placeholder="Objet rapide 2" style="width:30%;" />
+    <input type="text" name="attr_equip_objet3" placeholder="Objet rapide 3" style="width:30%;" />
+    <br>
+    <input type="text" name="attr_equip_objet4" placeholder="Objet rapide 4" style="width:30%; background-color: lightgrey;" />
+    <input type="text" name="attr_equip_objet5" placeholder="Objet rapide 5" style="width:30%; background-color: lightgrey;" />
+    <input type="text" name="attr_equip_objet6" placeholder="Objet rapide 6" style="width:30%; background-color: lightgrey;" />
+    <br>
+    <input type="text" name="attr_equip_objet7" placeholder="Objet rapide 7" style="width:30%; background-color: lightgrey;" />
+    <input type="text" name="attr_equip_objet8" placeholder="Objet rapide 8" style="width:30%; background-color: lightgrey;" />
+    <input type="text" name="attr_equip_objet9" placeholder="Objet rapide 9" style="width:30%; background-color: lightgrey;" />
+
+
+    <!--Objets-->
+    <fieldset class="repeating_objets">
+            <input type="text" name="attr_objet_nom" placeholder="Nom" style="width:30%;" />
+            <textarea name="attr_objet_eft" style="width:65%; margin-top: 10px; "></textarea>
+    </fieldset>
+
+</div>
+
+<hr>
+
+</div>
+
+    <!-- ============================================= 2 : COMPETENCES ============================================= -->
+<div class="sheet-tab-content sheet-tab2">
+    <div class="sheet-4colrow">
+    <!--Competences PHYSIQUE-->
+    <div class= "sheet-col" style="width:24%;">
+        <h3 style="margin-bottom: -10px;">PHYSIQUE <input class="rappel attributs" name="attr_physiqueC" value="@{physique}" disabled /></h3> <br>
+
+        <select  name="attr_carac_phys" class="competence">
+            <option value="@{force}">Force</option>
+            <option value="@{résistance}">Résistance</option>
+            <option value="@{intelligence}">Intelligence</option>
+            <option value="@{volonté}">Volonté</option>
+            <option value="@{coordination}">Coordination</option>
+            <option value="@{perception}">Perception</option>
+            <option value="@{présence}">Présence</option>
+            <option value="@{empathie}">Empathie</option>
+        </select>
+        <button class="competence" type='roll' value='/me a fait [[@{physique} + @{carac_phys} + 1d10 + ?{Bonus?|0}]] sur son jet de Physique + Carac ' name=""></button><br>
+
+
+      <h4>Combat</h4><br>
+    	<label class="competence tooltip">Armes lgr. :<span class="tooltiptext">Dagues, mains nues, prises...</span></label><input type="number" name="attr_armes_légères" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_armes_légères_bonus" value="0" min="0"/><button class="competence" type='roll' value='/me a fait [[@{physique} + @{armes_légères} + @{armes_légères_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de armes légères' name=""></button><br>
+    	<label class="competence tooltip">Armes int. :<span class="tooltiptext">Haches et épées à une main...</span></label><input type="number" name="attr_armes_intermédiaires" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_armes_intermédiaires_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{armes_intermédiaires} + @{armes_intermédiaires_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de armes intermédiaires' name=""></button><br>
+    	<label class="competence tooltip">Armes lrd. :<span class="tooltiptext">Gros trucs à deux mains</span></label><input type="number" name="attr_armes_lourdes" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_armes_lourdes_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{armes_lourdes} + @{armes_lourdes_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de armes lourdes' name=""></button><br>
+    	<label class="competence tooltip">Armes de jet :<span class="tooltiptext">Javelots, chakrams, fléchettes</span></label><input type="number" name="attr_armes_de_jet" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_armes_de_jet_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{armes_de_jet} + @{armes_de_jet_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de armes de jet' name=""></button><br>
+    	<div class="comp_line"><input type="text" name="attr_nom_combat_1" class="competence" placeholder="............"  /> <input type="number" name="attr_competence_combat_1" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{competence_combat_1} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_combat_1}' name=""></button></div>
+    	<div class="comp_line"><input type="text" name="attr_nom_combat_2" class="competence" placeholder="............"  /> <input type="number" name="attr_competence_combat_2" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{competence_combat_2} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_combat_2}' name=""></button></div>
+    	<div class="comp_line"><input type="text" name="attr_nom_combat_3" class="competence" placeholder="............"  /> <input type="number" name="attr_competence_combat_3" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{competence_combat_3} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_combat_3}' name=""></button></div>
+
+    	<h4>Mouvement</h4><br>
+    	<label class="competence tooltip">Athlétisme :<span class="tooltiptext">Course, Acrobatie, Escalade, équilibre</span></label><input type="number" name="attr_athlétisme" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_athlétisme_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{athlétisme} + @{athlétisme_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet d&#39;athlétisme' name=""></button><br>
+    	<label class="competence tooltip">Équitation :<span class="tooltiptext">Chevaux et lézards géants, attelages</span></label><input type="number" name="attr_équitation" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_équitation_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{équitation} + @{équitation_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet d&#39;équitation' name=""></button><br>
+    	<label class="competence tooltip">Esquive :<span class="tooltiptext">Eviter les coups ou les armes de jet</span></label><input type="number" name="attr_esquive" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_esquive_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{esquive} + @{esquive_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet d&#39;esquive' name=""></button><br>
+    	<label class="competence tooltip">Natation :<span class="tooltiptext">Nager, plonger</span></label><input type="number" name="attr_natation" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_natation_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{natation} + @{natation_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de natation' name=""></button><br>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............" name="attr_nom_mouvement_1" /> <input type="number" name="attr_competence_mouvement_1" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{competence_mouvement_1} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_mouvement_1}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............" name="attr_nom_mouvement_2" /> <input type="number" name="attr_competence_mouvement_2" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{competence_mouvement_2} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_mouvement_2}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............" name="attr_nom_mouvement_3" /> <input type="number" name="attr_competence_mouvement_3" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{competence_mouvement_3} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_mouvement_3}'  name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............" name="attr_nom_mouvement_4" /> <input type="number" name="attr_competence_mouvement_4" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{physique} + @{competence_mouvement_4} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_mouvement_4}' name=""></button></div>
+    </div>
+
+    <!--Competences MENTAL-->
+    <div class= "sheet-col" style="width:24%;">
+        <h3 style="margin-bottom: -10px;">MENTAL<input class="rappel attributs" name="attr_mentalC" value="@{mental}" disabled /></h3><br>
+
+        <select  name="attr_carac_mental" class="competence">
+            <option value="@{force}">Force</option>
+            <option value="@{résistance}">Résistance</option>
+            <option value="@{intelligence}">Intelligence</option>
+            <option value="@{volonté}">Volonté</option>
+            <option value="@{coordination}">Coordination</option>
+            <option value="@{perception}" style="background-color: #ffc45d;">Perception</option>
+            <option value="@{présence}">Présence</option>
+            <option value="@{empathie}">Empathie</option>
+        </select>
+      <button class="competence" type='roll' value='/me a fait [[@{mental} + @{carac_mental} + 1d10 + ?{Bonus?|0}]] sur son jet de Mental + Carac' name=""></button><br>
+
+    	<h4>Théorie</h4><br>
+      <label class="competence tooltip">Conn. Magie :<span class="tooltiptext">Connaissance des dragons, de la magie, aide à ressentir les flux<div class="reserved"> R : Mage, Erudit, Prodige </div></span></label><input type="number" name="attr_connaissances" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{connaissances} + 1d10 + ?{Bonus?|0}]] sur son jet de Connaissance de la Magie' name=""></button><br>
+    	<label class="competence tooltip">Orientation :<span class="tooltiptext">Cartographie, Se repérer avec étoiles, mousses, runes de voyage<div class="reserved"> R : Prodige, Voyageur </div></span></label><input type="number" name="attr_orientation" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{orientation} + 1d10 + ?{Bonus?|0}]] sur son jet de orientation' name=""></button><br>
+    	<label class="competence tooltip">Stratégie :<span class="tooltiptext">Créer des plans d'attaque, de défense<div class="reserved"> R : Combattant, Protecteur </div></span></label><input type="number" name="attr_stratégie" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{stratégie} + 1d10 + ?{Bonus?|0}]] sur son jet de stratégie' name=""></button><br>
+      <label class="competence tooltip">Traditions :<span class="tooltiptext">Histoire, géographie, loi, légendes<div class="reserved"> R : Commerçant, Erudit, Voyageur, Protecteur </div></span></label><input type="number" name="attr_histoire-géographie" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{histoire-géographie} + 1d10 + ?{Bonus?|0}]] sur son jet de Traditions (lore)' name=""></button> <br>
+      <div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_theorie_1"  /> <input type="number" name="attr_competence_théorie_1" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{competence_théorie_1} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_theorie_1}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_theorie_2"  /> <input type="number" name="attr_competence_théorie_2" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{competence_théorie_2} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_theorie_2}' name=""></button></div>
+      <div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_theorie_3"  /> <input type="number" name="attr_competence_théorie_3" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{competence_théorie_3} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_theorie_3}' name=""></button></div>
+
+    	<h4>Pratique</h4><br>
+    	<label class="competence tooltip">Alchimie :<span class="tooltiptext">Poisons, onguents, antidotes, poudres, substances... <div class="reserved"> R : Erudit, Artisan, Commerçant </div></span></label><input type="number" name="attr_alchimie" value="0" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{alchimie} + 1d10 + ?{Bonus?|0}]] sur son jet de alchimie' name=""></button><br>
+    	<label class="competence tooltip">Astrologie :<span class="tooltiptext">Cartes du ciel, thèmes d'augure, orientation la nuit, Prédictions<div class="reserved"> R : Erudit </div></span></label><input type="number" name="attr_astrologie" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{astrologie} + 1d10 + ?{Bonus?|0}]] sur son jet de astrologie' name=""></button><br>
+    	<label class="competence tooltip">Estimation :<span class="tooltiptext">Analyser prix et qualité d'un objet ou de matières premières<div class="reserved"> R : Artisan, Commerçant </div></span></label><input type="number" name="attr_estimation" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{estimation} + 1d10 + ?{Bonus?|0}]] sur son jet de estimation' name=""></button><br>
+    	<label class="competence tooltip">Lettres :<span class="tooltiptext">Lire, écrire, poèmes, discours<div class="reserved"> R : Commerçant, Erudit </div></span></label><input type="number" name="attr_lire_et_écrire" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{lire_et_écrire} + 1d10 + ?{Bonus?|0}]] sur son jet de lettres' name=""></button><br>
+    	<label class="competence tooltip">Médecine :<span class="tooltiptext">Diagnostiquer, trouver des traitements<div class="reserved"> R : Erudit, Prodige </div></span></label><input type="number" name="attr_médecine" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{médecine} + 1d10 + ?{Bonus?|0}]] sur son jet de médecine' name=""></button><br>
+    	<label class="competence tooltip">Vie sauvage :<span class="tooltiptext">Herboristerie, Premiers Soins, conn. des animaux, Survie<div class="reserved"> R : Erudit, Prodige, Voyageur </div></span></label><input type="number" name="attr_survie" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{survie} + 1d10 + ?{Bonus?|0}]] sur son jet de Vie sauvage' name=""></button><br>
+    	<label class="competence tooltip">Vie en cité :<span class="tooltiptext">Organisations, Personnes influentes, Rumeurs, passages secrets en ville<div class="reserved"> R : Commerçant, Protecteur </div></span></label><input type="number" name="attr_vie_en_cité" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{vie_en_cité} + 1d10 + ?{Bonus?|0}]] sur son jet de vie urbaine' name=""></button><br>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_pratique_1"  /> <input type="number" name="attr_competence_pratique_1" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{mental} + @{competence_pratique_1} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_pratique_1}' name=""></button></div>
+    </div>
+
+    <!--Competences MANUEL-->
+    <div class= "sheet-col" style="width:24%;">
+        <h3 style="margin-bottom: -10px;">MANUEL<input class="rappel attributs" name="attr_manuelC" value="@{manuel}" disabled /></h3><br>
+        <select  name="attr_carac_manuel" class="competence">
+            <option value="@{force}">Force</option>
+            <option value="@{résistance}">Résistance</option>
+            <option value="@{intelligence}">Intelligence</option>
+            <option value="@{volonté}">Volonté</option>
+            <option value="@{coordination}">Coordination</option>
+            <option value="@{perception}">Perception</option>
+            <option value="@{présence}">Présence</option>
+            <option value="@{empathie}">Empathie</option>
+        </select>
+      <button class="competence" type='roll' value='/me a fait [[@{manuel} + @{carac_manuel} + 1d10 + ?{Bonus?|0}]] sur son jet de Manuel + Carac' name=""></button><br>
+
+    	<h4>Technique</h4><br>
+    	<label class="competence tooltip">Artisanat :<span class="tooltiptext">Forge, Armurerie, Bijouterie, Contrefaçon<div class="reserved"> R : Artisan, Combattant </div></span></label><input type="number" name="attr_artisanats" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{artisanats} + 1d10 + ?{Bonus?|0}]] sur son jet de Artisanat' name=""></button><br>
+    	<label class="competence tooltip">Discrétion :<span class="tooltiptext">Discrétion, Faire les poches<div class="reserved"> R : Commerçant, Voyageur </div></span></label><input type="number" name="attr_roublardise" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{roublardise} + 1d10 + ?{Bonus?|0}]] sur son jet de Discrétion' name=""></button><br>
+      <label class="competence tooltip">Mécanisme :<span class="tooltiptext">Armes de siège, Comprendre/construire serrures, engrenages, ressorts, poulies...<div class="reserved"> R : Artisan, Commerçant </div></span></label><input type="number" name="attr_mecanisme" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{mecanisme} + 1d10 + ?{Bonus?|0}]] sur son jet de Mécanisme' name=""></button><br>
+      <label class="competence tooltip">Pister :<span class="tooltiptext">Repérer, dater, interpréter des traces hors de la ville</span></label><input type="number" name="attr_pister" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{pister} + 1d10 + ?{Bonus?|0}]] sur son jet de Pistage' name=""></button><br>
+      <div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_technique_1"  /> <input type="number" name="attr_competence_technique_1" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{competence_technique_1} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_technique_1}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_technique_2"  /> <input type="number" name="attr_competence_technique_2" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{competence_technique_2} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_technique_2}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_technique_3"  /> <input type="number" name="attr_competence_technique_3" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{competence_technique_3} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_technique_3}' name=""></button></div>
+
+    	<h4>Manipulation</h4><br>
+    	<label class="competence tooltip">Armes à proj. :<span class="tooltiptext">Arcs, frondes, etc.<div class="reserved"> R : Voyageurs </div></span></label><input type="number" name="attr_armes_à_projectiles" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{armes_à_projectiles} + 1d10 + ?{Bonus?|0}]] sur son jet de armes à projectiles' name=""></button><br>
+    	<label class="competence tooltip">Arts :<span class="tooltiptext">Peinture, intrument musique, sculpture</span></label><input type="number" name="attr_arts" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{arts} + 1d10 + ?{Bonus?|0}]] sur son jet de arts' name=""></button><br>
+    	<label class="competence tooltip">Déguisement :<span class="tooltiptext">Modifier son apparence (limite : corpulence et taille)</span></label><input type="number" name="attr_déguisement" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{déguisement} + 1d10 + ?{Bonus?|0}]] sur son jet de déguisement' name=""></button><br>
+    	<label class="competence tooltip">Jeux :<span class="tooltiptext">Bien jouer aux Cartes, dés, pions...</span></label><input type="number" name="attr_jeux" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{jeux} + 1d10 + ?{Bonus?|0}]] sur son jet de jeux' name=""></button><br>
+    	<label class="competence tooltip">Pièges :<span class="tooltiptext">Confectionner, poser, désamorcer des pièges<div class="reserved"> R : Artisan, Voyageur </div></span></label><input type="number" name="attr_sournoiserie" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{sournoiserie} + 1d10 + ?{Bonus?|0}]] sur son jet de Pièges' name=""></button><br>
+      <div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_manipulation_1"  /> <input type="number" name="attr_competence_manipulation_1" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{competence_manipulation_1} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_manipulation_1}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_manipulation_2"  /> <input type="number" name="attr_competence_manipulation_2" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{competence_manipulation_2} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_manipulation_2}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_manipulation_3"  /> <input type="number" name="attr_competence_manipulation_3" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{manuel} + @{competence_manipulation_3} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_manipulation_3}' name=""></button></div>
+    </div>
+
+    <!--Competences SOCIAL-->
+    <div class= "sheet-col" style="width:24%;">
+        <h3 style="margin-bottom: -10px;">SOCIAL<input class="rappel attributs" name="attr_socialC" value="@{social}" disabled /></h3><br>
+
+        <select  name="attr_carac_social" class="competence">
+            <option value="@{force}">Force</option>
+            <option value="@{résistance}">Résistance</option>
+            <option value="@{intelligence}">Intelligence</option>
+            <option value="@{volonté}">Volonté</option>
+            <option value="@{coordination}">Coordination</option>
+            <option value="@{perception}">Perception</option>
+            <option value="@{présence}">Présence</option>
+            <option value="@{empathie}">Empathie</option>
+        </select>
+        <button class="competence" type='roll' value='/me a fait [[@{social} + @{carac_social} + 1d10 + ?{Bonus?|0}]] sur son jet de Social + Carac' name=""></button><br>
+
+    	<h4>Communication</h4><br>
+    	<label class="competence tooltip">Éloquence :<span class="tooltiptext">Parole en public : Commandement, Conte, éloquence</span></label><input type="number" name="attr_éloquence" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_éloquence_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{éloquence} + @{éloquence_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de éloquence' name=""></button><br>
+    	<label class="competence tooltip">Marchandage :<span class="tooltiptext">Négocier prix d'une vente ou d'un achat<div class="reserved"> R : Artisan, Commerçant </div></span></label><input type="number" name="attr_marchandage" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_marchandage_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{marchandage} + @{marchandage_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de marchandage ' name=""></button><br>
+    	<label class="competence tooltip">Psychologie :<span class="tooltiptext">Comprendre/analyser motivations et émotions</span></label><input type="number" name="attr_psychologie" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_psychologie_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{psychologie} + @{psychologie_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de psychologie' name=""></button><br>
+    	<div class="comp_line" style="margin-left: 4px;"><input type="text" class="competence" placeholder="............"  name="attr_nom_communication_1"  /><input type="number" name="attr_competence_communication_1" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{competence_communication_1} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_communication_1}' name=""></button></div>
+    	<div class="comp_line" style="margin-left: 4px;"><input type="text" class="competence" placeholder="............"  name="attr_nom_communication_2"  /><input type="number" name="attr_competence_communication_2" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{competence_communication_2} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_communication_2}' name=""></button></div>
+    	<div class="comp_line" style="margin-left: 4px;"><input type="text" class="competence" placeholder="............"  name="attr_nom_communication_3"  /><input type="number" name="attr_competence_communication_3" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{competence_communication_3} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_communication_3}' name=""></button></div>
+      <div class="comp_line" style="margin-left: 4px;"><input type="text" class="competence" placeholder="............"  name="attr_nom_communication_4"  /><input type="number" name="attr_competence_communication_4" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{competence_communication_4} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_communication_4}' name=""></button></div>
+
+    	<h4>Influence</h4><br>
+    	<label class="competence tooltip">Dressage :<span class="tooltiptext">Enseigner des tours/dresser des animaux<div class="reserved"> R : Artisan, Prodige, Voyageur </div></span></label><input type="number" name="attr_dressage" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_dressage_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{dressage} + @{dressage_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de dressage' name=""></button><br>
+    	<label class="competence tooltip">Persuasion :<span class="tooltiptext">Diplomatie, intimidation, séduction</span></label><input type="number" name="attr_persuasion" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_persuasion_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{persuasion} + @{persuasion_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de persuasion' name=""></button><br>
+    	<label class="competence tooltip">Scène :<span class="tooltiptext">Danse, chant, théâtre</span></label><input type="number" name="attr_scène" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="attr_scène_bonus" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{scène} + @{scène_bonus} + 1d10 + ?{Bonus?|0}]] sur son jet de scènes' name=""></button><br>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_influence_1"  /> <input type="number" name="attr_competence_influence_1" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{competence_influence_1} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_influence_1}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_influence_2"  /> <input type="number" name="attr_competence_influence_2" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{competence_influence_2} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_influence_2}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_influence_3"  /> <input type="number" name="attr_competence_influence_3" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{competence_influence_3} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_influence_3}' name=""></button></div>
+    	<div class="comp_line"><input type="text" class="competence" placeholder="............"  name="attr_nom_influence_4"  /> <input type="number" name="attr_competence_influence_4" value="0" min="0" max="15" /><input class="comp_bonus" type="number" name="TODO_AREMPLIR" value="0" min="0" max="15" /><button class="competence" type='roll' value='/me a fait [[@{social} + @{competence_influence_4} + 1d10 + ?{Bonus?|0}]] sur son jet de @{nom_influence_4}' name=""></button></div>
+    </div>
+
+    <hr></hr>
+</div>
+
+</div>
+
+<!-- ============================================= 3 : MAGIE =============================================-->
+<div class="sheet-tab-content sheet-tab3">
+<!-- Les stats de magie-->
+<div class="sheet-colrow">
+    <!--Disciplines de magie-->
+    <div class="sheet-col" style="margin-left: 14%;">
+        <label>Instin.</label><input type="number" name="attr_magie_instinctive" value="0" min="0" max="40" /> <label>Invoc.</label><input type="number" name="attr_magie_invocatoire" value="0" min="0" max="40" />
+        <label>Sorcel.</label><input type="number" name="attr_magie_sorcellerie" value="0" min="0" max="40" />
+        <label>Réserve</label><input type="number" name="attr_magie_réserve" value="0" min="0" max="40" style="background-color: lightcyan;" />/<input type="number" name="attr_magie_réserve_max" value="0" min="0" max="40" style="background-color: lightcyan;" />
+    </div>
+
+    <!--Sphères de magie-->
+	<div class="sheet-col" style="margin-top: 39px; margin-left: 15%; border: 1px #402214 solid; border-radius: 12px; padding: 15px 15px 15px 0px;">
+
+		<img class="spells" src="https://imgur.com/1DsQbe0.png" title="Pierre" /> <input type="number" name="attr_réserve_pierre" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_pierre" value="0" min="0" max="40" />
+		<img class="spells" src="https://imgur.com/wejJeO1.png" title="Feu" /> <input type="number" name="attr_réserve_feu" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_feu" value="0" min="0" max="40" />
+		<img class="spells" src="https://imgur.com/aXQo2aT.png" title="Océan" /> <input type="number" name="attr_réserve_océan" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_océan" value="0" min="0" max="40" />
+		<br>
+		<br>
+		<img class="spells" src="https://imgur.com/T8z2oVt.png" title="Métal" /> <input type="number" name="attr_réserve_métal" value="0" min="0" max="40" /> /  <input type="number" name="attr_magie_métal" value="0" min="0" max="40" />
+		<img class="spells" src="https://imgur.com/STjaOdJ.png" title="Nature" /> <input type="number" name="attr_réserve_nature" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_nature" value="0" min="0" max="40" />
+		<img class="spells" src="https://imgur.com/09DvotA.png" title="Rêve" /> <input type="number" name="attrréservee_rêve" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_rêve" value="0" min="0" max="40" />
+		<img class="spells" src="https://imgur.com/SBGC23X.png" title="Blanche" /> <input type="number" name="attrréservee_blanche" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_blanche" value="0" min="0" max="40" />
+		<br>
+		<br>
+		<img class="spells" src="https://imgur.com/GYv3THu.png" title="Cité" /> <input type="number" name="attr_réserve_cité" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_cité" value="0" min="0" max="40" />
+		<img class="spells" src="https://imgur.com/VaHIcLz.png" title="Vent" /> <input type="number" name="attr_réserve_vent" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_vent" value="0" min="0" max="40" />
+		<img class="spells" src="https://imgur.com/vTZ9OCe.png" title="Ombre" /> <input type="number" name="attr_réserve_ombre" value="0" min="0" max="40" /> / <input type="number" name="attr_magie_ombre" value="0" min="0" max="40" />
+
+	</div>
+</div>
+
+<hr>
+
+<!--Les sorts -->
+<!--Titres tooltip-->
+    <div style="display: inline;">Nom</div>
+    <div style="display: inline;margin-left: 138px;">Discipl.</div>
+    <div style="display: inline;margin-left: 15px;">Sphère</div>
+    <div style="display: inline;margin-left: 27px;">Diff.</div>
+    <div style="display: inline;margin-left: 16px;">Coût</div>
+    <div style="display: inline;margin-left: 11px;">Bonus</div>
+
+<!--Les sorts-->
+    <fieldset class="repeating_skills">
+        <input type="text" name="attr_nom_sort" placeholder="Nom du sort" />
+        <select name="attr_discipline" style="width:55px;">
+            <option value="0">Dis.</option>
+            <option value="@{magie_instinctive}">Ins.</option>
+            <option value="@{magie_invocatoire}">Inv</option>
+            <option value="@{magie_sorcellerie}">Sor.</option>
+        </select>
+        <select name="attr_sphère" style="width:70px;">
+            <option value="0">Sphère</option>
+            <option value="@{magie_pierre}">Pierre</option>
+            <option value="@{magie_feu}">Feu</option>
+            <option value="@{magie_océan}">Océan</option>
+            <option value="@{magie_métal}">Métal</option>
+            <option value="@{magie_nature}">Nature</option>
+            <option value="@{magie_rêve}">Rêve</option>
+            <option value="@{magie_cité}">Cité</option>
+            <option value="@{magie_vent}">Vent</option>
+            <option value="@{magie_ombre}">Ombre</option>
+            <option value="@{magie_blanche}">Blanche</option>
+        </select>
+        <input name="attr_spell_diff" type="number" style="width:50px;" min="0" max="50" value="15" />
+        <input name="attr_spell_manacost" type="number" style="width:50px; background-color: lightcyan;" min="0" max="50" value="4" />
+        <input name="attr_spell_bonus_sort" type="number" style="width:50px;" min="0" max="50" value="0" />
+        <textarea name="attr_effet_sort"  style="width:40%;" placeholder="Effet du sort" ></textarea>
+        <button class="competence" type='roll' value='/me a fait [[@{discipline} + @{sphère} + @{spell_bonus_sort} + 1d10 + ?{Bonus?|0}]] sur son sort : @{nom_sort}. Difficulté:[[@{spell_diff}]]' name=""></button>
+    </fieldset>
+
+    <hr class="footer"></hr>
+</div>
+
+<!-- ======================================== 4° : POUVOIRS =============================================-->
+<div class="sheet-tab-content sheet-tab4">
+
+<!-- Actifs -->
+<h3> Actifs </h3>
+    <fieldset class="repeating_actif">
+        <input type="text" name="attr_actif_nom" placeholder="Nom" style="width:20%;" />
+        <select name="attr_actif_type" style="width:72px;">
+            <option value="0">Source</option>
+            <option value="1">Caste</option>
+            <option value="2">Lien</option>
+            <option value="3">D/avantage</option>
+            <option value="4">Autre</option>
+        </select>
+        <textarea name="attr_actif_eft" style="width:65%; margin-top: 10px; "></textarea>
+    </fieldset>
+
+<!--Passifs -->
+<h3 style="margin-top: 35px;"> Passifs </h3>
+    <fieldset class="repeating_passif">
+        <input type="text" name="attr_passif_nom" placeholder="Nom" style="width:20%;" />
+        <select name="attr_passif_type" style="width:72px;">
+            <option value="0">Source</option>
+            <option value="1">Caste</option>
+            <option value="2">Lien</option>
+            <option value="3">D/avantage</option>
+            <option value="4">Autre</option>
+        </select>
+        <textarea name="attr_passif_eft" style="width:65%; margin-top: 10px; "></textarea>
+    </fieldset>
+
+<!--Interdits-->
+<h3 style="margin-top: 35px;"> Interdits </h3>
+    <fieldset class="repeating_interdit">
+        <input type="text" name="attr_interdit_nom" placeholder="Nom" style="width:20%;" />
+        <select name="attr_interdit_type" style="width:72px;">
+            <option value="0">Source</option>
+            <option value="1">Caste</option>
+            <option value="2">Lien</option>
+            <option value="3">D/avantage</option>
+            <option value="4">Autre</option>
+        </select>
+        <textarea name="attr_interdit_eft" style="width:65%; margin-top: 10px; "></textarea>
+    </fieldset>
+
+<!--Personnalité-->
+<h3 style="margin-top: 35px;"> Personnalité </h3>
+    <fieldset class="repeating_personnalité">
+        <input type="text" name="attr_personnalité_nom" placeholder="Nom" style="width:20%;" />
+        <select name="attr_personnalité_type" style="width:72px;">
+            <option value="0">Source</option>
+            <option value="1">Caste</option>
+            <option value="2">Lien</option>
+            <option value="3">D/avantage</option>
+            <option value="4">Autre</option>
+        </select>
+        <textarea name="attr_personnalité_eft" style="width:65%; margin-top: 10px; "></textarea>
+    </fieldset>
+
+    <h3 style="margin-top: 35px;"> Notes </h3>
+<textarea name="attr_notes" style="width:750px; height:500px; margin-top: 10px; "></textarea>
+
+
+<hr>
+
+</div>
+
+<!--        ======================      JAVASCRIPT  =======================                   -->
+
+<script type="text/worker">
+
+/*Calcul auto de l'initiative*/
+on("change:coordination change:perception", function() {
+    getAttrs(["coordination","perception","initiative"], function(values) {
+        let val1 = parseInt(values.coordination);
+        let val2 = parseInt(values.perception);
+        let somme = val1 + val2;
+
+        if(somme <= 5){
+            setAttrs({
+                initiative: 1
+            });
+        }
+
+        if(somme >= 6 && somme <= 9){
+            setAttrs({
+                initiative: 2
+            });
+        }
+
+        if(somme >= 10 && somme <= 13){
+            setAttrs({
+                initiative: 3
+            });
+        }
+
+        if(somme >= 14 && somme <= 16){
+            setAttrs({
+                initiative: 4
+            });
+        }
+
+        if(somme >= 17 && somme <= 19){
+            setAttrs({
+                initiative: 5
+            });
+        }
+
+    });
+});
+
+/*Calcul du nombre de blessure max*/
+on("sheet:opened change:résistance change:volonté", function() {
+   getAttrs(["volonté","résistance","nb_egrat"], function(values) {
+        let val1 = parseInt(values.résistance);
+        let val2 = parseInt(values.volonté);
+        let somme = val1 + val2;
+
+        if(somme < 5){
+            setAttrs({
+                nb_egrat: 2,
+                nb_légère: 1,
+                nb_grave: 1,
+                nb_fatale: 1,
+                nb_mort: 1
+            });
+        }
+
+        if(somme >= 5 && somme < 10){
+            setAttrs({
+                nb_egrat: 3,
+                nb_légère: 2,
+                nb_grave: 1,
+                nb_fatale: 1,
+                nb_mort: 1
+            });
+        }
+
+        if(somme >= 10 && somme < 15){
+            setAttrs({
+                nb_egrat: 3,
+                nb_légère: 2,
+                nb_grave: 2,
+                nb_fatale: 1,
+                nb_mort: 1
+            });
+        }
+
+        if(somme >= 15 && somme < 20){
+            setAttrs({
+                nb_egrat: 3,
+                nb_légère: 3,
+                nb_grave: 2,
+                nb_fatale: 2,
+                nb_mort: 1
+            });
+        }
+
+        if(somme >= 20){
+            setAttrs({
+                nb_egrat: 3,
+                nb_légère: 4,
+                nb_grave: 3,
+                nb_fatale: 2,
+                nb_mort: 1
+            });
+        }
+  });
+});
+
+
+/*Calcul des attributs à partir des caracs (!version custom!)*/
+on("sheet:opened change:force change:résistance", function() {
+   getAttrs(["force","résistance","physique"], function(values) {
+        let val1 = parseInt(values.force);
+        let val2 = parseInt(values.résistance);
+        let moy = Math.floor((val1 + val2) /  2);
+
+        setAttrs({
+            physique: moy
+        });
+  });
+});
+
+on("sheet:opened change:intelligence change:volonté", function() {
+   getAttrs(["intelligence","volonté","mental"], function(values) {
+        let val1 = parseInt(values.intelligence);
+        let val2 = parseInt(values.volonté);
+        let moy = Math.floor((val1 + val2) /  2);
+
+        setAttrs({
+            mental: moy
+        });
+  });
+});
+
+on("sheet:opened change:coordination change:perception", function() {
+   getAttrs(["coordination","perception","manuel"], function(values) {
+        let val1 = parseInt(values.coordination);
+        let val2 = parseInt(values.perception);
+        let moy = Math.floor((val1 + val2) /  2);
+
+        setAttrs({
+            manuel: moy
+        });
+  });
+});
+
+on("sheet:opened change:présence change:empathie", function() {
+   getAttrs(["présence","empathie","social"], function(values) {
+        let val1 = parseInt(values.présence);
+        let val2 = parseInt(values.empathie);
+        let moy = Math.floor((val1 + val2) /  2);
+
+        setAttrs({
+            social: moy
+        });
+  });
+});
+
+/*Impossible de dépasser la maitrise max*/
+on("change:maitrise", function() {
+    getAttrs(["maitrise","maitrise_max"], function(values) {
+       let maitrise = parseInt(values.maitrise);
+       let maitrise_max = parseInt(values.maitrise_max);
+
+           if( maitrise > maitrise_max){
+                setAttrs({
+                    maitrise: maitrise_max
+                });
+            }
+    });
+});
+
+/*Impossible de dépasser la chance max*/
+on("change:chance", function() {
+   getAttrs(["chance","chance_max"], function(values) {
+        if( parseInt(values.chance) > parseInt(values.chance_max)){
+            setAttrs({
+                chance: values.chance_max
+            });
+        }
+  });
+});
+
+/*Impossible de dépasser la maitrise max*/
+on("change:armure", function() {
+    getAttrs(["armure","armure_max"], function(values) {
+       let armure = parseInt(values.armure);
+       let armure_max = parseInt(values.armure_max);
+
+           if( armure > armure_max){
+                setAttrs({
+                    armure: armure_max
+                });
+            }
+    });
+});
+
+/*La sphère ne peut dépasser tendance dragon (ou fatalisme) + 5*/
+on("change:magie_pierre", function() {
+   getAttrs(["magie_pierre","draconisme"], function(values) {
+
+        if( parseInt(values.magie_pierre) > parseInt(values.draconisme) + 5){
+            setAttrs({
+                magie_pierre: parseInt(values.draconisme) + 5
+            });
+        }
+  });
+});
+
+on("change:magie_feu", function() {
+   getAttrs(["magie_feu","draconisme"], function(values) {
+        if( parseInt(values.magie_feu) > parseInt(values.draconisme) + 5){
+            setAttrs({
+                magie_feu: parseInt(values.draconisme) + 5
+            });
+        }
+  });
+});
+on("change:magie_océan", function() {
+   getAttrs(["magie_océan","draconisme"], function(values) {
+        if( parseInt(values.magie_océan) > parseInt(values.draconisme) + 5){
+            setAttrs({
+                magie_océan: parseInt(values.draconisme) + 5
+            });
+        }
+  });
+});
+on("change:magie_métal", function() {
+   getAttrs(["magie_métal","draconisme"], function(values) {
+        if( parseInt(values.magie_métal) > parseInt(values.draconisme) + 5){
+            setAttrs({
+                magie_métal: parseInt(values.draconisme) + 5
+            });
+        }
+  });
+});
+on("change:magie_nature", function() {
+   getAttrs(["magie_nature","draconisme"], function(values) {
+        if( parseInt(values.magie_nature) > parseInt(values.draconisme) + 5){
+            setAttrs({
+                magie_nature: parseInt(values.draconisme) + 5
+            });
+        }
+  });
+});
+on("change:magie_rêve", function() {
+   getAttrs(["magie_rêve","draconisme"], function(values) {
+        if( parseInt(values.magie_rêve) > parseInt(values.draconisme) + 5){
+            setAttrs({
+                magie_rêve: parseInt(values.draconisme) + 5
+            });
+        }
+  });
+});
+
+on("change:magie_vent", function() {
+   getAttrs(["magie_vent","draconisme"], function(values) {
+        if( parseInt(values.magie_vent) > parseInt(values.draconisme) + 5){
+            setAttrs({
+                magie_vent: parseInt(values.draconisme) + 5
+            });
+        }
+  });
+});
+on("change:magie_ombre", function() {
+   getAttrs(["magie_ombre","fatalisme"], function(values) {
+        if( parseInt(values.magie_ombre) > parseInt(values.fatalisme) + 5){
+            setAttrs({
+                magie_ombre: parseInt(values.fatalisme) + 5
+            });
+        }
+  });
+});
+
+</script>
